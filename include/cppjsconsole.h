@@ -12,6 +12,8 @@
 class Console{
     private:
         std::map<std::string,void*> typeToMap;
+        int numOfGroups=0;
+        std::string groupTab="    ";
     public:
         template <typename T>
         void time(T foo){
@@ -27,15 +29,19 @@ class Console{
             int output=(clock()-preTime+.0)/CLOCKS_PER_SEC*1000;
             printf(": %dms\n",output);
         }
-        template <typename T>
-        void log(T foo){
-            std::cout<<foo<<std::endl;
+        template <typename HEAD,typename... TYPES>
+        void log(HEAD head,TYPES... tail){
+            std::cout<<head<<' ';
+            this->log(tail...);
+        }
+        void log(){
+            puts("");
         }
         void clear(){
             system("clear");
         }
         template <typename T>
-        static void assert(bool flag,T foo){
+        void assert(bool flag,T foo){
             try{
                 if(!flag)throw foo;
             }
@@ -43,6 +49,41 @@ class Console{
                 printf("Assertion failed: ");
                 std::cout<<foo<<std::endl;
             }
+        }
+        template <typename T>
+        void debug(T foo){
+            this->log(foo);
+        }
+        template <typename T>
+        void error(T foo){
+            printf("Console.error: ");
+            this->log(foo);
+        }
+        template <typename T>
+        void exception(T foo){
+            this->error(foo);
+        }
+        template <typename T>
+        void group(T foo){
+            numOfGroups++;
+            this->log(foo);
+        }
+        void groupEnd(){
+            numOfGroups--;
+            if(numOfGroups<0)numOfGroups=0;
+        }
+        template <typename T>
+        void info(T foo){
+            printf("console.info: ");
+            this->log(foo);
+        }
+        template <typename T>
+        void warn(T foo){
+            printf("console.warn: ");
+            this->log(foo);
+        }
+        void trace(){
+
         }
 };
 Console console;

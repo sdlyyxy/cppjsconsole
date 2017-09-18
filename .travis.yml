@@ -1,0 +1,16 @@
+language: C++
+sudo: enabled
+matrix:
+    include:
+        - os: linux
+          compiler: g++
+        - os: linux
+          compiler: clang++
+        - os: osx
+          compiler: g++
+        - os: osx
+          compiler: clang++
+script:
+    - mkdir build
+    - cd build
+    - cmake .. && make 
