@@ -10,7 +10,28 @@ matrix:
           compiler: g++
         - os: osx
           compiler: clang++
+
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - lcov
+
 script:
     - mkdir build
     - cd build
-    - cmake .. && make 
+    - cmake -DENABLE_COVERAGE=ON .. 
+    - make 
+
+after_success:
+    - cd ..
+    - lcov -d build -z
+    - lcov -d build -b . --no-external --initial -c -o CMakeGcovSupportInitialCoverage.info
+    - build/testdemo
+    - lcov -d build -b . --no-external -c -o CMakeGcovSupportCoverage.info
+    - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+
+notifications:
+  email:
+    - sdlyyxy@icloud.com
