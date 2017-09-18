@@ -19,7 +19,7 @@ class Console{
     public:
         template <typename T>
         void time(T foo){
-            std::map<T,int> paraToTime;
+            static std::map<T,int> paraToTime;
             typeToMap[typeid(T).name()]=(void*)&paraToTime;
             paraToTime[foo]=clock();
         }
