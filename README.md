@@ -1,4 +1,6 @@
-# cppjsconsole [![Build Status](https://travis-ci.org/sdlyyxy/cppjsconsole.svg?branch=master)](https://travis-ci.org/sdlyyxy/cppjsconsole)
+# cppjsconsole 
+
+[![Build Status](https://travis-ci.org/sdlyyxy/cppjsconsole.svg?branch=master)](https://travis-ci.org/sdlyyxy/cppjsconsole) [![codecov](https://codecov.io/gh/sdlyyxy/cppjsconsole/branch/master/graph/badge.svg)](https://codecov.io/gh/sdlyyxy/cppjsconsole)
 
 ## 概况
 
